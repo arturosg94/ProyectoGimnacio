@@ -44,5 +44,17 @@ namespace ProyectoGimnacio.Controllers
                 return RedirectToAction("Login", "Home");
             }
         }
+
+        public ActionResult Rutina()
+        {
+            if (Session.Count > 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
     }
 }

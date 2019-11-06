@@ -50,6 +50,12 @@ namespace ProyectoGimnacio
             );
 
             routes.MapRoute(
+                name: "Rutina",
+                url: "Rutina",
+                defaults: new { controller = "Entrenamiento", action = "Rutina" }
+            );
+
+            routes.MapRoute(
                 name: "alimentos",
                 url: "alimentos",
                 defaults: new { controller = "Nutricion", action = "Alimentos" }

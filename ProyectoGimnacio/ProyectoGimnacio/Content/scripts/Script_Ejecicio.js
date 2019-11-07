@@ -4,7 +4,7 @@
 });
 
 function init(){
-    CargarEjercicios();
+    MostrarEjercicios();
 }
 
 function events() {
@@ -20,7 +20,7 @@ function upload() {
 }
 
 //Carga la tabla inicial de los ejercicos
-function CargarEjercicios() {
+function CargarMaquinas() {
     console.log('se cargo los ejercicios');
     //$.ajax({
     //    url: 'Entrenamiento/CargarEjercicios',

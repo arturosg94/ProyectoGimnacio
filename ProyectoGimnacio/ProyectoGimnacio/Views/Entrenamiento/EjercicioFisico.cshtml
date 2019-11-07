@@ -30,10 +30,10 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-2">
-                    <a href="#modal-without-animation" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
+                    <a href="#modal_ejerciciofisico" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
                 </div>
                 <!-- modal agregar -->
-                <div class="modal show" id="modal-without-animation">
+                <div class="modal show" id="modal_ejerciciofisico">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -45,9 +45,9 @@
                                     <label class="col-form-label col-md-3">Ejercicio</label>
                                     <div class="col-md-9">
                                         <select class="default-select2 form-control" id="select2-ejercicio">
-                                            <option>Curl</option>
-                                            <option>Press banca</option>
-                                            <option>Press Militar</option>
+                                            <option value="1">Curl</option>
+                                            <option value="2">Press banca</option>
+                                            <option value="3">Press Militar</option>
                                         </select>
                                     </div>
                                         @*<div class="col-md-9">
@@ -62,9 +62,9 @@
                                     <label class="col-form-label col-md-3">Musculo</label>
                                     <div class="col-md-9">
                                         <select class="default-select2 form-control" id="select2-musculo">
-                                            <option>Bicep</option>
-                                            <option>Tricep</option>
-                                            <option>Pertoral</option>
+                                            <option value="1">Bicep</option>
+                                            <option value="2">Tricep</option>
+                                            <option value="3">Pertoral</option>
                                         </select>
                                     </div>
                                 </div>
@@ -72,15 +72,15 @@
                                     <label class="col-form-label col-md-3">Maquina</label>
                                     <div class="col-md-9">
                                         <select class="default-select2 form-control" id="select2-maquina">
-                                            <option>Prensa</option>
-                                            <option>Banca</option>
-                                            <option>Polea</option>
+                                            <option value="1">Prensa</option>
+                                            <option value="2">Banca</option>
+                                            <option value="3">Polea</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-green">GUARDAR</button>
+                                <button type="button" id="btn_guardar" class="btn btn-green">GUARDAR</button>
                                 <a href="javascript:;" class="btn btn-white" data-dismiss="modal">CANCELAR</a>
                             </div>
                         </div>

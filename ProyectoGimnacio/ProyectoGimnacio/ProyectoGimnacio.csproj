@@ -526,7 +526,9 @@
     <Content Include="Content\scripts\Script_Dieta.js" />
     <Content Include="Content\scripts\Script_EjercicioFisico.js" />
     <Content Include="Content\scripts\Script_Ejecicio.js" />
+    <Content Include="Content\scripts\Script_Maquina.js" />
     <Content Include="Content\scripts\Script_Login.js" />
+    <Content Include="Content\scripts\Script_Rutina.js" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

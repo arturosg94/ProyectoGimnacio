@@ -22,15 +22,14 @@ function upload() {
 //Carga la tabla inicial de los ejercicos
 function MostrarEjercicios() {
     console.log('se cargo los ejercicios');
-    var rsp;
     $.ajax({
         url: 'MostrarEjercicio',
         type: 'POST',
         success: function (response) {
-            $.each(response, function (i, item) {
-                //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-                console.log(item.EjercicioID,item.Nombre,item.Imagen);
-            })
+            //$.each(response, function (i, item) {
+            //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+            //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
+            //})
             console.log(response);
         },
         complete: function(){
@@ -54,13 +53,13 @@ function AgregarEjercicio(nombre) {
                 $.gritter.add({
                     title: ':)',
                     text: response[0].Mensaje,
-                    class_name: 'gritter-light'
+                    //class_name: 'gritter-light'
                 });
             } else {
                 $.gritter.add({
                     title: 'Error',
-                    text: response[0].Mensaje,
-                    class_name: 'gritter-light'
+                    text: response[0].Mensaje
+                    //class_name: 'gritter-light'
                 });
             }
             console.log(response);

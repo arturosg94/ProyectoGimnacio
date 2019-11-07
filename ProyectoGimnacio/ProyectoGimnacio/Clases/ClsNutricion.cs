@@ -9,15 +9,18 @@ namespace ProyectoGimnacio.Clases
     {
         public int AlimentoID { get; set; }
         public string Nombre { get; set; }
+        public int Calorias { get; set; }
         public int Proteinas { get; set; }
         public decimal Grasas { get; set; }
         public int Carbohidratos { get; set; }
+        public int Peso { get; set; }
     }
 
     public class Comida
     {
         public int ComidaID { get; set; }
         public string Nombre { get; set; }
+        public int Calorias { get; set; }
         public int Proteinas { get; set; }
         public decimal Grasas { get; set; }
         public int Carbohidratos { get; set; }

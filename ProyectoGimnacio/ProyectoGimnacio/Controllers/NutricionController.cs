@@ -79,22 +79,22 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
-        public JsonResult MostrarMaquina()
+        public JsonResult MostrarComida()
         {
             JsonResult response = null;
-            List<Maquina> list = new List<Maquina>();
+            List<Comida> list = new List<Comida>();
             NutricionModel cn = new NutricionModel();
-            list = cn.MostrarMaquina();
+            list = cn.MostrarComida();
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
 
-        public JsonResult AgregarMaquina(string Nombre, string Fabricante)
+        public JsonResult AgregarMaquina(string Nombre)
         {
             JsonResult response = null;
             List<E_MensajeSalida> list = new List<E_MensajeSalida>();
             NutricionModel cn = new NutricionModel();
-            list = cn.AgregarMaquina(Nombre, Fabricante);
+            list = cn.AgregarComida(Nombre);
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }

@@ -41,10 +41,10 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-2">
-                    <a href="#modal-without-animation" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
+                    <a href="#modal_agregaralimentos" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
                 </div>
                 <!-- modal agregar -->
-                <div class="modal show" id="modal-without-animation">
+                <div class="modal show" id="modal_agregaralimentos">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -55,34 +55,34 @@
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control m-b-5" placeholder="Ingresar el nombre del alimento">
+                                        <input type="text" id="txt_nombre" class="form-control m-b-5" placeholder="Ingresar el nombre del alimento">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Proteinas</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control m-b-5" placeholder="Proteinas">
+                                        <input type="text" id="txt_proteinas" class="form-control m-b-5" placeholder="Proteinas">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Grasa</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control m-b-5" placeholder="Grasa">
+                                        <input type="text" id="txt_grasa" class="form-control m-b-5" placeholder="Grasa">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Carbohidratos</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control m-b-5" placeholder="Carbohidrato">
+                                        <input type="text" id="txt_carbohidratos"class="form-control m-b-5" placeholder="Carbohidrato">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-green">GUARDAR</button>
+                                <button type="button" id="btn_guardar" class="btn btn-green">GUARDAR</button>
                                 <a href="javascript:;" class="btn btn-white" data-dismiss="modal">CANCELAR</a>
                             </div>
                         </div>
@@ -97,17 +97,20 @@
                             <tr role="row">
                                 <th width="1%" class="sorting_asc" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 0px;" aria-sort="ascending" aria-label=": activate to sort column descending">
                                 </th>
-                                <th width="25%" data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                                <th width="24%" data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="">
                                     NOMBRE
                                 </th>
-                                <th width="25%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
+                                <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
                                     PROTEINAS
                                 </th>
-                                <th width="25%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
+                                <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
                                     GRASA
                                 </th>
                                 <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
                                     CARBOHIDRATOS
+                                </th>
+                                <th width="3%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1">
+
                                 </th>
                             </tr>
                         </thead>
@@ -120,6 +123,7 @@
                                 <td style="">17,50gr</td>
                                 <td style="">1,30gr</td>
                                 <td style="">83,70kcal</td>
+                                <td><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5"><i class="fas fa-trash-alt"></i></button></td>
 
                             </tr>
                         </tbody>
@@ -159,6 +163,6 @@
 
 }
 @section scripts{
-
+    <script src="~/Content/scripts/Script_Alimentos.js"></script>
 }
 

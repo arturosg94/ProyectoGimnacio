@@ -522,6 +522,7 @@
     <Content Include="Content\assets\plugins\x-editable-bs4\dist\inputs-ext\wysihtml5\wysihtml5.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\scripts\Script_Alimentos.js" />
     <Content Include="Content\scripts\Script_Comida.js" />
     <Content Include="Content\scripts\Script_Dieta.js" />
     <Content Include="Content\scripts\Script_EjercicioFisico.js" />

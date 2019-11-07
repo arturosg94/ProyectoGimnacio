@@ -4,24 +4,25 @@
 });
 
 function init() {
-    $('#select2-alimento').select2({ placeholder: "Selecciona alimento" });
-    MostrarComidas();
+    MostrarAlimentos();
 }
 
 function events() {
-    $(document).on('click', '#btn_agregar', function () {
+    $(document).on('click', '#btn_guardar', function () {
         var nombre = $('#txt_nombre').val();
-        var alimentoID = $('#select2-alimento').val();
-        AgregarAlimento(nombre,alimentoID);
+        var proteinas = $('#txt_proteinas').val();
+        var grasa = $('#txt_grasa').val();
+        var carbohidratos = $('#txt_carbohidratos').val();
+        AgregarAlimentos(nombre,proteinas,grasa,carbohidratos);
         $('#modal_agregaralimentos').modal('hide');
     })
 }
 
 //Carga la tabla inicial de los alimentos
-function MostrarComidas() {
-    console.log('se cargo las comidas');
+function MostrarAlimentos() {
+    console.log('se cargo los alimentos');
     //$.ajax({
-    //    url: 'Nutricion/MostrarComidas',
+    //    url: 'Nutricion/MostrarAlimentos',
     //    type: 'POST',
     //    success: function (response) {
     //        $.each(response, function (i, item) {
@@ -33,13 +34,15 @@ function MostrarComidas() {
     //})
 }
 
-function AgregarAlimento(nombre,alimentoID) {
+function AgregarAlimentos(nombre,proteinas,grasa,carbohidratos) {
     var data = {};
     data.nombre = nombre;
-    data.alimentoID = alimentoID;
+    data.proteinas = proteinas;
+    data.grasa = grasa;
+    data.carbohidratos=carbohidratos;
     console.log(data);
     //$.ajax({
-    //    url: 'Nutricion/AgregarComidas',
+    //    url: 'Nutricion/AgregarAlimentos',
     //    type: 'POST',
     //    data: data,
     //    contentType: "application/json; charset=utf-8",

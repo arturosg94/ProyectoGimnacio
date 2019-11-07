@@ -4,7 +4,7 @@
 });
 
 function init(){
-    CargarEjercicios();
+    MostrarEjercicios();
 }
 
 function events() {
@@ -20,37 +20,52 @@ function upload() {
 }
 
 //Carga la tabla inicial de los ejercicos
-function CargarEjercicios() {
+function MostrarEjercicios() {
     console.log('se cargo los ejercicios');
-    //$.ajax({
-    //    url: 'Entrenamiento/CargarEjercicios',
-    //    type: 'POST',
-    //    success: function (response) {
-    //        $.each(response, function (i, item) {
-    //            $('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-    //        })
-    //    },
-    //    complete: function(){
-    //    }
-    //})
+    var rsp;
+    $.ajax({
+        url: 'MostrarEjercicio',
+        type: 'POST',
+        success: function (response) {
+            $.each(response, function (i, item) {
+                //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                console.log(item.EjercicioID,item.Nombre,item.Imagen);
+            })
+            console.log(response);
+        },
+        complete: function(){
+        }
+    })
 }
 
 function AgregarEjercicio(nombre) {
     var data = {};
-    data.nombre = nombre;
+    data.Nombre = nombre;
+    data.Imagen = "Imagen";
     console.log(data);
-    //$.ajax({
-    //    url: 'Entrenamiento/AgregarEjercicio',
-    //    type: 'POST',
-    //    data: data,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (response) {
-    //        $.each(response, function (i, item) {
-    //            //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-    //        })
-    //    },
-    //    complete: function(){
-    //    }
-    //})
+    $.ajax({
+        url: 'AgregarEjercicio',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response[0].Valor=='1') {
+                $.gritter.add({
+                    title: ':)',
+                    text: response[0].Mensaje,
+                    class_name: 'gritter-light'
+                });
+            } else {
+                $.gritter.add({
+                    title: 'Error',
+                    text: response[0].Mensaje,
+                    class_name: 'gritter-light'
+                });
+            }
+            console.log(response);
+        },
+        complete: function(){
+        }
+    })
 }

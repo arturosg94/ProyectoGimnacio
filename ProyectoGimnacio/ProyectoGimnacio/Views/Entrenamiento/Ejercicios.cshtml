@@ -45,7 +45,7 @@
                     <a href="#modal-without-animation" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
                 </div>
                 <!-- modal agregar -->
-                <div class="modal show" id="modal-without-animation">
+                <div class="modal show" id="modal_agregarejercicio">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -56,7 +56,7 @@
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control m-b-5" placeholder="Ingresar el nombre del ejercicio">
+                                        <input type="text" id="txt_nombre" class="form-control m-b-5" placeholder="Ingresar el nombre del ejercicio">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-green">GUARDAR</button>
+                                <button type="button" id="btn_guardar" class="btn btn-green">GUARDAR</button>
                                 <a href="javascript:;" class="btn btn-white" data-dismiss="modal">CANCELAR</a>
                             </div>
                         </div>

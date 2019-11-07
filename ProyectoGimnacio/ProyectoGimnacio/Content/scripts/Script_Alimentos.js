@@ -21,17 +21,18 @@ function events() {
 //Carga la tabla inicial de los alimentos
 function MostrarAlimentos() {
     console.log('se cargo los alimentos');
-    //$.ajax({
-    //    url: 'Nutricion/MostrarAlimentos',
-    //    type: 'POST',
-    //    success: function (response) {
-    //        $.each(response, function (i, item) {
-    //            $('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-    //        })
-    //    },
-    //    complete: function(){
-    //    }
-    //})
+    $.ajax({
+        url: 'Nutricion/MostrarAlimentos',
+       type: 'POST',
+        success: function (response) {
+            $.each(response, function (i, item) {
+                //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                
+            })
+        },
+        complete: function(){
+        }
+    })
 }
 
 function AgregarAlimentos(nombre,proteinas,grasa,carbohidratos) {
@@ -41,18 +42,29 @@ function AgregarAlimentos(nombre,proteinas,grasa,carbohidratos) {
     data.grasa = grasa;
     data.carbohidratos=carbohidratos;
     console.log(data);
-    //$.ajax({
-    //    url: 'Nutricion/AgregarAlimentos',
-    //    type: 'POST',
-    //    data: data,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (response) {
-    //        $.each(response, function (i, item) {
-    //            //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-    //        })
-    //    },
-    //    complete: function(){
-    //    }
-    //})
+    $.ajax({
+        url: 'AgregarAlimentos',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response[0].Valor == '1') {
+                $.gritter.add({
+                    title: ':)',
+                    text: response[0].Mensaje,
+                    class_name: 'gritter-light'
+                });
+            } else {
+                $.gritter.add({
+                    title: 'Error',
+                    text: response[0].Mensaje,
+                    class_name: 'gritter-light'
+                });
+            }
+            console.log(response);
+        },
+        complete: function () {
+        }
+    })
 }

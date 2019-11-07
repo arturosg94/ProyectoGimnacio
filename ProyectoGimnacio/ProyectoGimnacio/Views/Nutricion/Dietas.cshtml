@@ -25,10 +25,10 @@
                 <div class="col-sm-11 col-md-11">
                 </div>
                 <div class="col-sm-1 col-md-1 m-b-15">
-                    <a href="#modal-without-animation" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
+                    <a href="#modal-_agregardieta" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
                 </div>
                 <!-- modal agregar -->
-                <div class="modal show" id="modal-without-animation">
+                <div class="modal show" id="modal_agregardieta">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -39,14 +39,14 @@
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control m-b-5" placeholder="Ingresar el nombre de la Dieta">
+                                        <input type="text" id="txt_nombre" class="form-control m-b-5" placeholder="Ingresar el nombre de la Dieta">
                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">
                                     <label class="col-lg-3 col-form-label">Comida</label>
                                     <div class="col-lg-8">
-                                        <select class="default-select2 form-control" id="select2-alimento">
+                                        <select class="default-select2 form-control" id="select2-comida">
                                             <option>Platano</option>
                                             <option>Quinua</option>
                                             <option>Pollo</option>
@@ -57,14 +57,14 @@
                                 <div class="form-group row m-b-10">
                                     <label class="col-lg-3 col-form-label">Horario</label>
                                     <div class="col-lg-8">
-                                        <select class="default-select2 form-control" id="select2-alimento">
+                                        <select class="default-select2 form-control" id="select2-horario">
                                             <option>Desayuno</option>
                                             <option>Almuerzo</option>
                                             <option>Cena</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-1">
-                                        <button type="button" class="btn btn-green m-r-5 m-b-5">+</button>
+                                        <button type="button" id="btn_agregar" class="btn btn-green m-r-5 m-b-5">+</button>
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">

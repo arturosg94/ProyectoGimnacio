@@ -5,6 +5,7 @@
 function init() {
     MostrarMaquinas();
     MostrarEjercicios();
+    MostrarMusculos();
     $('#select2-ejercicio').select2({ placeholder: "Seleccionar ejercicio" });
     $('#select2-musculo').select2({ placeholder: "Seleccionar muscculo" });
     $('#select2-maquina').select2({ placeholder: "Seleccionar maquina" });
@@ -91,6 +92,8 @@ function MostrarMaquinas() {
                 $('#select2-maquina').append(newOption).trigger('change');
             })
             console.log(response);
+            $('#select2-maquina').val(-1);
+            $('#select2-maquina').trigger('change');
         },
         complete: function () {
         }
@@ -112,7 +115,33 @@ function MostrarEjercicios() {
                 var newOption = new Option(data.text, data.id, false, false);
                 $('#select2-ejercicio').append(newOption).trigger('change');
             })
+            $('#select2-ejercicio').val(-1);
+            $('#select2-ejercicio').trigger('change');
             console.log(response);
+        },
+        complete: function () {
+        }
+    })
+}
+
+function MostrarMusculos() {
+    $('#select2-musculo').val(null).trigger('change');
+    console.log('se cargo los ejercicios');
+    $.ajax({
+        url: 'MostrarMusculo',
+        type: 'POST',
+        success: function (response) {
+            $.each(response, function (i, item) {
+                var data = {
+                    id: item.MusculoID,
+                    text: item.Nombre
+                };
+                var newOption = new Option(data.text, data.id, false, false);
+                $('#select2-musculo').append(newOption).trigger('change');
+            })
+            console.log(response);
+            $('#select2-musculo').val(-1);
+            $('#select2-musculo').trigger('change');
         },
         complete: function () {
         }

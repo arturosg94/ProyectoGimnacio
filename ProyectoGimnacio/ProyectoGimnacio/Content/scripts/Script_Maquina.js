@@ -15,16 +15,24 @@ function events() {
 }
 
 function MostrarMaquinas() {
+    $('#data-table-default tbody').html('');
     console.log('se cargo las maquinas');
+    var row = "";
     var rsp;
     $.ajax({
         url: 'MostrarMaquina',
         type: 'POST',
         success: function (response) {
             $.each(response, function (i, item) {
-                
-                console.log(item.EjercicioID, item.nombre, item.fabricante);
+                //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
+                row += '<tr class="gradeX odd" role="row">';
+                row += '<td>' + item.MaquinaID + '</td>';
+                row += '<td>' + item.Nombre + '</td>';
+                row += '<td>' + item.Fabricante + '</td>';
+                row += '</tr>';
             })
+            $('#data-table-default tbody').append(row);
             console.log(response);
         },
         complete: function () {

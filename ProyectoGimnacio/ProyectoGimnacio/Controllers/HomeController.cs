@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProyectoGimnacio.Models;
+using ProyectoGimnacio.Clases;
 
 namespace ProyectoGimnacio.Controllers
 {
@@ -36,7 +38,8 @@ namespace ProyectoGimnacio.Controllers
 
         public ActionResult Logout()
         {
-
+            Session["DNI"] = null;
+            Session["Nombre"] = null;
             Session.Clear();
             return RedirectToAction("Login", "Home");
 
@@ -52,11 +55,27 @@ namespace ProyectoGimnacio.Controllers
         //    return list;
         //}
 
-        public String LoginUser(string DNI, string Password)
+        //public String LoginUser(string DNI, string Password)
+        //{
+        //    String list = "1";
+        //    Session["DNI"] = DNI;
+        //    return list;
+        //}
+
+        public JsonResult ValiUsuario(string DNI, string Contraseña)
         {
-            String list = "1";
-            Session["DNI"] = DNI;
-            return list;
+            
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            HomeModel cn = new HomeModel();
+            list = cn.ValiUsuario(DNI, Contraseña);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            if (list[0].Valor=="1")
+            {
+                Session["DNI"] = DNI;
+                Session["Nombre"] = list[0].Mensaje;
+            }
+            return response;
         }
 
     }

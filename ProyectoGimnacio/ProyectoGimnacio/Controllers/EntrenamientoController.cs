@@ -79,6 +79,16 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+        public JsonResult MostrarMusculo()
+        {
+            JsonResult response = null;
+            List<Musculo> list = new List<Musculo>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.MostrarMusculo();
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
         public JsonResult MostrarMaquina()
         {
             JsonResult response = null;

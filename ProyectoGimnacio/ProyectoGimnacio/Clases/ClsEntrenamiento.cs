@@ -19,6 +19,13 @@ namespace ProyectoGimnacio.Clases
         public string Fabricante { get; set; }
     }
 
+    public class Musculo
+    {
+        public int MusculoID { get; set; }
+        public string Nombre { get; set; }
+        public string ParteCuerpo { get; set; }
+    }
+
     public class EjercicioFisico
     {
         public int EjercicioFisicoID { get; set; }

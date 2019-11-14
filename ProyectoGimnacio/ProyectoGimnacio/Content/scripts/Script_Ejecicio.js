@@ -21,15 +21,23 @@ function upload() {
 
 //Carga la tabla inicial de los ejercicos
 function MostrarEjercicios() {
+    $('#data-table-default tbody').html('');
     console.log('se cargo los ejercicios');
+    var row="";
     $.ajax({
         url: 'MostrarEjercicio',
         type: 'POST',
         success: function (response) {
-            //$.each(response, function (i, item) {
+            $.each(response, function (i, item) {
             //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
             //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
-            //})
+                row += '<tr class="gradeX odd" role="row">';
+                row += '<td>' + item.EjercicioID + '</td>';
+                row += '<td>' + item.Imagen + '</td>';
+                row += '<td>' + item.Nombre + '</td>';
+                row += '</tr>';
+            })
+            $('#data-table-default tbody').append(row);
             console.log(response);
         },
         complete: function(){

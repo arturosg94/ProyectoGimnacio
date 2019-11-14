@@ -14,6 +14,7 @@
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />*@
     <link href="~/Content/assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body class="pace-top">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group m-b-15">
-                            <input type="text" class="form-control form-control-lg" placeholder="DNI" id="txt_dni" required />
+                            <input type="text" class="form-control form-control-lg solo-numeros" placeholder="DNI" id="txt_dni" autocomplete="off" required />
                         </div>
                         <div class="form-group m-b-15">
                             <input type="password" class="form-control form-control-lg" placeholder="Contraseña" id="txt_contraseña" required />
@@ -90,6 +91,7 @@
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="~/Content/assets/js/app.min.js"></script>
     <script src="~/Content/assets/js/theme/default.min.js"></script>
+    <script src="~/Content/assets/plugins/gritter/js/jquery.gritter.js"></script>
     <script src="~/Content/scripts/Script_Login.js"></script>
     <!-- ================== END BASE JS ================== -->
     @*<script>

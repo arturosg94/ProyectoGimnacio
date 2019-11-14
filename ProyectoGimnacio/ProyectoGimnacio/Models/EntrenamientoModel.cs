@@ -69,6 +69,34 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        public List<Musculo> MostrarMusculo()
+        {
+            List<Musculo> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_musculo", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    Musculo entidad = null;
+                    listEntidad = new List<Musculo>();
+                    while (reader.Read())
+                    {
+                        entidad = new Musculo();
+                        entidad.MusculoID = reader.GetInt32(0);
+                        entidad.Nombre = reader.GetString(1);
+                        entidad.ParteCuerpo = reader.GetString(2);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
         public List<Maquina> MostrarMaquina()
         {
             List<Maquina> listEntidad = null;

@@ -505,6 +505,7 @@
     <Content Include="Content\assets\plugins\superbox\font\superboxicons8788.svg" />
     <Content Include="Content\assets\plugins\superbox\jquery.superbox.min.js" />
     <Content Include="Content\assets\plugins\superbox\superbox.min.css" />
+    <Content Include="Content\assets\plugins\sweetalert2\dist\sweetalert2.js" />
     <Content Include="Content\assets\plugins\sweetalert\dist\sweetalert.min.js" />
     <Content Include="Content\assets\plugins\switchery\switchery.min.css" />
     <Content Include="Content\assets\plugins\switchery\switchery.min.js" />

@@ -18,7 +18,7 @@ namespace ProyectoGimnacio.Models
                 connection.Open();
                 SqlCommand command = new SqlCommand("pa_vali_usuario", connection);
                 command.Parameters.Add("@DNI", SqlDbType.Char).Value = DNI;
-                command.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Contraseña;
+                command.Parameters.Add("@Contrasena", SqlDbType.VarChar).Value = Contraseña;
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
                 if (reader.HasRows)

@@ -11,6 +11,8 @@ namespace ProyectoGimnacio.Models
 {
     public class EntrenamientoModel : ConexionModel
     {
+
+        /****************************EJERCICIO******************************************************/
         public List<Ejercicio> MostrarEjercicio()
         {
             List<Ejercicio> listEntidad = null;
@@ -69,6 +71,67 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        public List<E_MensajeSalida> EditarEjercicio(int EjercicoID,string Nombre, string Imagen)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_ejercicio", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                command.Parameters.Add("@EjercicioID", SqlDbType.VarChar).Value = EjercicoID;
+                command.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Nombre;
+                command.Parameters.Add("@Imagen", SqlDbType.VarChar).Value = Imagen;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+        public List<E_MensajeSalida> EliminarEjercicio(int EjercicioID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_ejercicio", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
+                command.Parameters.Add("@EjercicioID", SqlDbType.VarChar).Value = EjercicioID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        /****************************MUSCULO******************************************************/
+
         public List<Musculo> MostrarMusculo()
         {
             List<Musculo> listEntidad = null;
@@ -97,6 +160,7 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        /****************************MAQUINA******************************************************/
         public List<Maquina> MostrarMaquina()
         {
             List<Maquina> listEntidad = null;
@@ -155,6 +219,7 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        /****************************EJERCICIO-FISICO******************************************************/
         public List<EjercicioFisico> MostrarEjercicioFisico()
         {
             List<EjercicioFisico> listEntidad = null;
@@ -218,6 +283,7 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        /****************************RUTINA******************************************************/
         public List<Rutina> MostrarRutina()
         {
             List<Rutina> listEntidad = null;

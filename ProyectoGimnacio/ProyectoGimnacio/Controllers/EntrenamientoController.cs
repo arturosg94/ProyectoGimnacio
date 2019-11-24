@@ -59,6 +59,8 @@ namespace ProyectoGimnacio.Controllers
             }
         }
 
+        /****************************EJERCICIO******************************************************/
+
         public JsonResult MostrarEjercicio()
         {
             JsonResult response = null;
@@ -79,6 +81,29 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+
+        public JsonResult EditarEjercicio(int EjercicioID,string Nombre, string Imagen)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EditarEjercicio(EjercicioID,Nombre, Imagen);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult EliminarEjercicio(int EjercicioID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EliminarEjercicio(EjercicioID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        /****************************MUSCULO******************************************************/
+
         public JsonResult MostrarMusculo()
         {
             JsonResult response = null;
@@ -88,6 +113,8 @@ namespace ProyectoGimnacio.Controllers
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
+
+        /****************************MAQUINA******************************************************/
 
         public JsonResult MostrarMaquina()
         {
@@ -109,6 +136,8 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+        /****************************EJERCICIO-FISICO******************************************************/
+
         public JsonResult MostrarEjercicioFisico()
         {
             JsonResult response = null;
@@ -128,6 +157,8 @@ namespace ProyectoGimnacio.Controllers
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
+
+        /****************************RUTINA******************************************************/
 
         public JsonResult MostrarRutina()
         {

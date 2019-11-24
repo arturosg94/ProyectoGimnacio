@@ -57,6 +57,7 @@ function AgregarMaquina(nombre,fabricante) {
                     text: response[0].Mensaje,
                     class_name: 'gritter-light'
                 });
+                MostrarMaquinas();
             } else {
                 $.gritter.add({
                     title: 'Error',

@@ -24,39 +24,46 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="dataTables_length" id="data-table-default_length">
-                        <label>
-                            Show
-                            <select name="data-table-default_length" aria-controls="data-table-default" class="custom-select custom-select-sm form-control form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select> entries
-                        </label>
-                    </div>
+                        @*<label>
+        Show
+        <select name="data-table-default_length" aria-controls="data-table-default" class="custom-select custom-select-sm form-control form-control-sm">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select> entries
+    </label>*@
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        @*<div id="data-table-default_filter" class="dataTables_filter">
+            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="data-table-default"></label>
+        </div>*@
+    </div>
+    <div class="col-sm-6 col-md-2">
+        <a href="#modal_agregaralimento" class="btn btn-sm btn-success" data-toggle="modal" style="margin-bottom: 15px;" id="btn_agregar">AGREGAR</a>
+    </div>
+    <!-- modal agregar -->
+    <div class="modal show" id="modal_agregaralimento">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Alimento</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                <div class="col-sm-12 col-md-4">
-                    <div id="data-table-default_filter" class="dataTables_filter">
-                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="data-table-default"></label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-2">
-                    <a href="#modal_agregaralimentos" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
-                </div>
-                <!-- modal agregar -->
-                <div class="modal show" id="modal_agregaralimentos">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Agregar Alimento</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            </div>
-                            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="form-group row m-b-10">
+                        <label class="col-form-label col-md-3">Nombre</label>
+                        <div class="col-md-9">
+                            <input type="text" id="txt_nombre" class="form-control m-b-5" placeholder="Ingresar el nombre del alimento">
+                            @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
+                                    </div>
+                                </div>
                                 <div class="form-group row m-b-10">
-                                    <label class="col-form-label col-md-3">Nombre</label>
+                                     <label class="col-form-label col-md-3">Calorias</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="txt_nombre" class="form-control m-b-5" placeholder="Ingresar el nombre del alimento">
-                                        @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
+                                         <input type="text" id="txt_calorias" class="form-control m-b-5" placeholder="Calorias">
+                                         @*<small class="f-s-12 text-grey-darker">We'll never share your email with anyone else.</small>*@
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-10">
@@ -83,6 +90,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="btn_guardar" class="btn btn-green">GUARDAR</button>
+                                <button type="button" id="btn_modificar" class="btn btn-green">ACTUALIZAR</button>
                                 <a href="javascript:;" class="btn btn-white" data-dismiss="modal">CANCELAR</a>
                             </div>
                         </div>
@@ -95,27 +103,18 @@
                     <table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="data-table-default_info" style="/* width: 1568px; */">
                         <thead>
                             <tr role="row">
-                                <th width="1%" class="sorting_asc" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 0px;" aria-sort="ascending" aria-label=": activate to sort column descending">
-                                </th>
-                                <th width="24%" data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="">
-                                    NOMBRE
-                                </th>
-                                <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
-                                    PROTEINAS
-                                </th>
-                                <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
-                                    GRASA
-                                </th>
-                                <th width="24%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">
-                                    CARBOHIDRATOS
-                                </th>
-                                <th width="3%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1">
-
-                                </th>
+                                <th width="1%" class="sorting_asc" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" aria-sort="ascending"></th>  
+                                <th width="15%" data-orderable="false" class="sorting_disabled" rowspan="1" colspan="1" aria-label="">NOMBRE</th>
+                                <th width="15%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">CALORIAS </th>
+                                <th width="15%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">PROTEINAS </th>
+                                <th width="15%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">GRASA</th>
+                                <th width="14%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">CARBOHIDRATOS</th>
+                                <th width="15%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1" style="width: 264px;" aria-label="Rendering engine: activate to sort column ascending">PESO </th>
+                                <th width="10%" class="text-nowrap sorting" tabindex="0" aria-controls="data-table-default" rowspan="1" colspan="1">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="gradeX odd" role="row">
+                            @*<tr class="gradeX odd" role="row">
                                 <td width="1%" class="f-s-600 text-inverse sorting_1" tabindex="0">1</td>
                                 <td width="1%" class="with-img">
                                     Lenguado
@@ -124,8 +123,7 @@
                                 <td style="">1,30gr</td>
                                 <td style="">83,70kcal</td>
                                 <td><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5"><i class="fas fa-trash-alt"></i></button></td>
-
-                            </tr>
+                            </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -160,9 +158,10 @@
     <!-- end panel-body -->
 </div>
 @section links{
-
+    <link href="~/Content/assets/plugins/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
 }
 @section scripts{
+    <script src="~/Content/assets/plugins/dropzone/dist/min/dropzone.min.js"></script>
     <script src="~/Content/scripts/Script_Alimentos.js"></script>
 }
 

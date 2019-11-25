@@ -135,6 +135,25 @@ namespace ProyectoGimnacio.Controllers
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
+        public JsonResult EditarMaquina(int MaquinaID, string Nombre, string Fabricante)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EditarMaquina(MaquinaID, Nombre, Fabricante);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult EliminarMaquina(int MaquinaID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EliminarMaquina(MaquinaID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
 
         /****************************EJERCICIO-FISICO******************************************************/
 

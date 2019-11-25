@@ -2,11 +2,9 @@
     init();
     events();
 });
-
 function init(){
     MostrarEjercicios();
 }
-
 function events() {
     //evento modal agregar
     $(document).on('click', '#btn_agregar', function () {
@@ -38,11 +36,6 @@ function events() {
     $(document).on('click', '#btn_modificar', function () {
         var EjercicioID = $(this).attr('data-ejercicioID');
         var Nombre = $('#txt_nombre').val();
-        $('#btn_modificar').css('display', 'block');
-        $('#btn_modificar').attr('data-ejercicioid', EjercicioID);
-        $('#txt_nombre').val(Nombre);
-        //$('#btn_modificar').attr('data-nombre', Nombre);
-        $('#btn_guardar').css('display', 'none');
         EditarEjercicio(EjercicioID, Nombre);
         $('#modal_agregarejercicio').modal('hide');
     })

@@ -219,6 +219,65 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        public List<E_MensajeSalida> EditarMaquina(int MaquinaID, string Nombre, string Fabricante)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_maquina", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                command.Parameters.Add("@MaquinaID", SqlDbType.VarChar).Value = MaquinaID;
+                command.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Nombre;
+                command.Parameters.Add("@Fabricante", SqlDbType.VarChar).Value = Fabricante;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+        public List<E_MensajeSalida> EliminarMaquina(int MaquinaID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_maquina", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
+                command.Parameters.Add("@MaquinaID", SqlDbType.VarChar).Value = MaquinaID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
         /****************************EJERCICIO-FISICO******************************************************/
         public List<EjercicioFisico> MostrarEjercicioFisico()
         {

@@ -59,6 +59,7 @@ namespace ProyectoGimnacio.Controllers
             }
         }
 
+        /****************************ALIMENTO******************************************************/
         public JsonResult MostrarAlimento()
         {
             JsonResult response = null;
@@ -69,15 +70,35 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
-        public JsonResult AgregarAlimento(string Nombre, int Proteinas, decimal Grasas, int Carbohidratos)
+        public JsonResult AgregarAlimento(string Nombre, int Calorias, decimal Proteinas, decimal Grasas, decimal Carbohidratos)
         {
             JsonResult response = null;
             List<E_MensajeSalida> list = new List<E_MensajeSalida>();
             NutricionModel cn = new NutricionModel();
-            list = cn.AgregarAlimento(Nombre, Proteinas, Grasas, Carbohidratos);
+            list = cn.AgregarAlimento(Nombre, Calorias, Proteinas, Grasas, Carbohidratos);
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
+        public JsonResult EditarAlimento(int AlimentoID, string Nombre,int Calorias, decimal Proteinas, decimal Grasas, decimal Carbohidratos)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.EditarAlimento(AlimentoID, Nombre, Calorias, Proteinas, Grasas, Carbohidratos);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult EliminarAlimento(int AlimentoID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.EliminarAlimento(AlimentoID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+        /****************************COMIDA******************************************************/
 
         public JsonResult MostrarComida()
         {
@@ -99,26 +120,7 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
-        public JsonResult MostrarEjercicioFisico()
-        {
-            JsonResult response = null;
-            List<EjercicioFisico> list = new List<EjercicioFisico>();
-            NutricionModel cn = new NutricionModel();
-            list = cn.MostrarEjercicioFisico();
-            response = Json(list, JsonRequestBehavior.AllowGet);
-            return response;
-        }
-
-        public JsonResult AgregarEjercicioFisico(int EjercicioID, int MusculoID, int MaquinaID)
-        {
-            JsonResult response = null;
-            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
-            NutricionModel cn = new NutricionModel();
-            list = cn.AgregarEjercicioFisico(EjercicioID, MusculoID, MaquinaID);
-            response = Json(list, JsonRequestBehavior.AllowGet);
-            return response;
-        }
-
+        /****************************RUTINA******************************************************/
         public JsonResult MostrarRutina()
         {
             JsonResult response = null;

@@ -33,7 +33,6 @@ namespace ProyectoGimnacio.Clases
         public string EjercicioNombre { get; set; }
         public int MusculoID { get; set; }
         public string MusculoNombre { get; set; }
-
         public int MaquinaID { get; set; }
         public string MaquinaNombre { get; set; }
 
@@ -47,6 +46,18 @@ namespace ProyectoGimnacio.Clases
         public string NivelRutinaNombre { get; set; }
         public int TipoRutinaID { get; set; }
         public string TipoRutinaNombre { get; set; }
+        public string Nombre { get; set; }
+    }
+
+    public class NivelRutina
+    {
+        public int NivelRutinaID { get; set; }
+        public string Nombre { get; set; }
+    }
+
+    public class TipoRutina
+    {
+        public int TipoRutinaID { get; set; }
         public string Nombre { get; set; }
     }
 

@@ -177,6 +177,26 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+        public JsonResult EditarEjercicioFisico(int EjercicioFisicoID, int EjercicioID, int MaquinaID, int MusculoID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EditarEjercicioFisico(EjercicioFisicoID, EjercicioID, MaquinaID, MusculoID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult EliminarEjercicioFisico(int EjercicioFisicoID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EliminarEjercicioFisico(EjercicioFisicoID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
         /****************************RUTINA******************************************************/
 
         public JsonResult MostrarRutina()
@@ -195,6 +215,36 @@ namespace ProyectoGimnacio.Controllers
             List<E_MensajeSalida> list = new List<E_MensajeSalida>();
             EntrenamientoModel cn = new EntrenamientoModel();
             list = cn.AgregarRutina(NivelRutinaID, TipoRutinaID, Nombre);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult AgregarDetalleRutina(int RutinaID, int EjercicioFisicoID, int Series, int Repeticiones, int Peso, int Descanso)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.AgregarDetalleRutina(RutinaID, EjercicioFisicoID, Series, Repeticiones, Peso, Descanso);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult MostrarNivelRutina()
+        {
+            JsonResult response = null;
+            List<NivelRutina> list = new List<NivelRutina>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.MostrarNivelRutina();
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult MostrarTipoRutina()
+        {
+            JsonResult response = null;
+            List<TipoRutina> list = new List<TipoRutina>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.MostrarTipoRutina();
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }

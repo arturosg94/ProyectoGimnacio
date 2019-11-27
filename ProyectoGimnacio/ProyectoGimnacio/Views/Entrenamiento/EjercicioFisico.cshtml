@@ -25,12 +25,12 @@
                 <div class="col-sm-12 col-md-6">
                 </div>
                 <div class="col-sm-12 col-md-4">
-                    <div id="data-table-default_filter" class="dataTables_filter">
+                    @*<div id="data-table-default_filter" class="dataTables_filter">
                         <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="data-table-default"></label>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="col-sm-6 col-md-2">
-                    <a id="btn_modalagregar" class="btn btn-sm btn-success" data-toggle="modal">AGREGAR</a>
+                    <a id="btn_modalagregar" class="btn btn-sm btn-success" data-toggle="modal" style="margin-bottom: 15px;">AGREGAR</a>
                 </div>
                 <!-- modal agregar -->
                 <div class="modal show" id="modal_ejerciciofisico">
@@ -47,20 +47,11 @@
                                         <select class="default-select2 form-control" id="select2-ejercicio">
                                         </select>
                                     </div>
-                                        @*<div class="col-md-9">
-                <select class="form-control">
-                    <option>Curl</option>
-                    <option>Press banca</option>
-                    <option>Press Militar</option>
-                </select>
-            </div>*@
                                 </div>
                                 <div class="form-group row m-b-10">
                                     <label class="col-form-label col-md-3">Musculo</label>
                                     <div class="col-md-9">
                                         <select class="default-select2 form-control" id="select2-musculo">
-                                            <option value="1">Biceps</option>
-                                            <option value="2">Triceps</option>
                                         </select>
                                     </div>
                                 </div>
@@ -74,6 +65,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="btn_guardar" class="btn btn-green">GUARDAR</button>
+                                <button type="button" id="btn_modificar" class="btn btn-green">ACTUALIZAR</button>
                                 <a href="javascript:;" class="btn btn-white" data-dismiss="modal">CANCELAR</a>
                             </div>
                         </div>

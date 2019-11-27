@@ -342,6 +342,66 @@ namespace ProyectoGimnacio.Models
             return listEntidad;
         }
 
+        public List<E_MensajeSalida> EditarEjercicioFisico(int EjercicioFisicoID, int EjercicioID, int MaquinaID, int MusculoID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_ejerciciofisico", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                command.Parameters.Add("@EjercicioFisicoID", SqlDbType.Int).Value = EjercicioFisicoID;
+                command.Parameters.Add("@EjercicioID", SqlDbType.Int).Value = EjercicioID;
+                command.Parameters.Add("@MaquinaID", SqlDbType.Int).Value = MaquinaID;
+                command.Parameters.Add("@MusculoID", SqlDbType.Int).Value = MusculoID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+        public List<E_MensajeSalida> EliminarEjercicioFisico(int EjercicioFisicoID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_ejercicio", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
+                command.Parameters.Add("@EjercicioFisicoID", SqlDbType.Int).Value = EjercicioFisicoID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
         /****************************RUTINA******************************************************/
         public List<Rutina> MostrarRutina()
         {
@@ -349,7 +409,7 @@ namespace ProyectoGimnacio.Models
             using (SqlConnection connection = new SqlConnection(GymDB))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("pa_most_Rutina", connection);
+                SqlCommand command = new SqlCommand("pa_most_rutina", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
                 if (reader.HasRows)
@@ -360,11 +420,66 @@ namespace ProyectoGimnacio.Models
                     {
                         entidad = new Rutina();
                         entidad.RutinaID = reader.GetInt32(0);
-                        entidad.NivelRutinaID = reader.GetInt32(1);
-                        entidad.NivelRutinaNombre = reader.GetString(2);
-                        entidad.TipoRutinaID = reader.GetInt32(3);
-                        entidad.TipoRutinaNombre = reader.GetString(4);
-                        entidad.Nombre = reader.GetString(5);
+                        entidad.Nombre = reader.GetString(1);
+                        entidad.NivelRutinaID = reader.GetInt32(2);
+                        entidad.NivelRutinaNombre = reader.GetString(3);
+                        entidad.TipoRutinaID = reader.GetInt32(4);
+                        entidad.TipoRutinaNombre = reader.GetString(5);
+                        
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<NivelRutina> MostrarNivelRutina()
+        {
+            List<NivelRutina> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_nivelrutina", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    NivelRutina entidad = null;
+                    listEntidad = new List<NivelRutina>();
+                    while (reader.Read())
+                    {
+                        entidad = new NivelRutina();
+                        entidad.NivelRutinaID = reader.GetInt32(0);
+                        entidad.Nombre = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<TipoRutina> MostrarTipoRutina()
+        {
+            List<TipoRutina> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_tiporutina", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    TipoRutina entidad = null;
+                    listEntidad = new List<TipoRutina>();
+                    while (reader.Read())
+                    {
+                        entidad = new TipoRutina();
+                        entidad.TipoRutinaID = reader.GetInt32(0);
+                        entidad.Nombre = reader.GetString(1);
                         listEntidad.Add(entidad);
                     }
                 }
@@ -380,11 +495,45 @@ namespace ProyectoGimnacio.Models
             using (SqlConnection connection = new SqlConnection(GymDB))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("pa_mant_ejerciciofisico", connection);
+                SqlCommand command = new SqlCommand("pa_mant_rutina", connection);
                 command.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
                 command.Parameters.Add("@NivelRutinaID", SqlDbType.Int).Value = NivelRutinaID;
                 command.Parameters.Add("@TipoRutinaID", SqlDbType.Int).Value = TipoRutinaID;
                 command.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Nombre;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<E_MensajeSalida> AgregarDetalleRutina(int RutinaID, int EjercicioFisicoID, int Series, int Repeticiones, int Peso, int Descanso)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_detallerutina", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
+                command.Parameters.Add("@RutinaID", SqlDbType.Int).Value = RutinaID;
+                command.Parameters.Add("@EjercicioFisicoID", SqlDbType.Int).Value = EjercicioFisicoID;
+                command.Parameters.Add("@Series", SqlDbType.Int).Value = Series;
+                command.Parameters.Add("@Repeticiones", SqlDbType.Int).Value = Repeticiones;
+                command.Parameters.Add("@Peso", SqlDbType.Int).Value = Peso;
+                command.Parameters.Add("@Descanso", SqlDbType.Int).Value = Descanso;
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
                 if (reader.HasRows)

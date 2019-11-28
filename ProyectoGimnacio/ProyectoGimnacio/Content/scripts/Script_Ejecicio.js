@@ -1,4 +1,13 @@
-﻿$(document).ready(function () {
+﻿var TablaEjercicios = $('#tabla_ejercicios').DataTable({
+    "language": {
+        "emptyTable": "No hay ejercicios",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+        "infoEmpty": "Sin filas",
+        "sLengthMenu": "Mostrar _MENU_ filas",
+        "sSearch": "Buscar"
+    }
+});
+$(document).ready(function () {
     init();
     events();
 });
@@ -72,24 +81,22 @@ function upload() {
 
 //Carga la tabla inicial de los ejercicos
 function MostrarEjercicios() {
-    $('#data-table-default tbody').html('');
-    console.log('se cargo los ejercicios');
-    var row="";
+    TablaEjercicios.clear().draw();
     $.ajax({
         url: 'MostrarEjercicio',
         type: 'POST',
         success: function (response) {
             $.each(response, function (i, item) {
-            //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-            //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
-                row += '<tr class="gradeX odd" role="row">';
-                row += '<td>' + item.EjercicioID + '</td>';
-                row += '<td>' + item.Imagen + '</td>';
-                row += '<td>' + item.Nombre + '</td>';
-                row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button></td>';
-                row += '</tr>';
+            ////    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+            ////    console.log(item.EjercicioID,item.Nombre,item.Imagen);
+            //    row += '<tr class="gradeX odd" role="row">';
+            //    row += '<td>' + item.EjercicioID + '</td>';
+            //    row += '<td>' + item.Imagen + '</td>';
+            //    row += '<td>' + item.Nombre + '</td>';
+            //    row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button></td>';
+            //    row += '</tr>';
+                TablaEjercicios.row.add([item.EjercicioID, item.Nombre, item.Imagen , '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
             })
-            $('#data-table-default tbody').append(row);
             console.log(response);
         },
         complete: function(){

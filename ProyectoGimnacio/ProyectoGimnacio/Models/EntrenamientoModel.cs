@@ -379,7 +379,7 @@ namespace ProyectoGimnacio.Models
             using (SqlConnection connection = new SqlConnection(GymDB))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("pa_mant_ejercicio", connection);
+                SqlCommand command = new SqlCommand("pa_mant_ejerciciofisico", connection);
                 command.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
                 command.Parameters.Add("@EjercicioFisicoID", SqlDbType.Int).Value = EjercicioFisicoID;
                 command.CommandType = CommandType.StoredProcedure;

@@ -248,5 +248,15 @@ namespace ProyectoGimnacio.Controllers
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
+
+        public JsonResult EliminarRutina(int RutinaID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EliminarRutina(RutinaID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
     }
 }

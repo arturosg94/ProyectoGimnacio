@@ -62,6 +62,9 @@
             });
         })
 
+        $(document).on('keyup', '.solo-numeros', function () {
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+        });
     }
 
     init();

@@ -29,9 +29,9 @@ function init() {
     MostrarNivelRutina();
     MostrarTipoRutina();
     MostrarEjercicioFisico();
-    $('#select2-nivelrutina').select2({ placeholder: "Seleccionar ejercicio" });
-    $('#select2-tiporutina').select2({ placeholder: "Seleccionar musculo" });
-    $('#select2-ejerciciofisico').select2({ placeholder: "Seleccionar maquina" });
+    $('#select2-nivelrutina').select2({ placeholder: "Seleccionar nivel de rutina" });
+    $('#select2-tiporutina').select2({ placeholder: "Seleccionar tipo de rutina" });
+    $('#select2-ejerciciofisico').select2({ placeholder: "Seleccionar ejercicio fisico" });
     $('#table_detalle').DataTable();
 }
 
@@ -112,15 +112,23 @@ function events() {
 
     //evento para editar
     $(document).on('click', '.btn-editar', function () {
-        var EjercicioID = $(this).attr('data-ejercicioID');
+        var RutinaID = $(this).attr('data-rutinaid');
         var Nombre = $(this).attr('data-nombre');
+        var TipoRutinaID = $(this).attr('data-tiporutinaid');
+        var NivelRutinaID = $(this).attr('data-nivelrutinaid');
         $('#btn_modificar').css('display', 'block');
-        $('#btn_modificar').attr('data-ejercicioID', EjercicioID);
+        $('#btn_modificar').attr('data-rutinaid', RutinaID);
         $('#txt_nombre').val(Nombre);
-        //$('#btn_modificar').attr('data-nombre', Nombre);
+        $('#select2-nivelrutina').val(NivelRutinaID);
+        $('#select2-nivelrutina').trigger('change');
+        $('#select2-tiporutina').val(TipoRutinaID);
+        $('#select2-tiporutina').trigger('change');
+        $('#select2-ejerciciofisico').val(-1);
+        $('#select2-ejerciciofisico').trigger('change');
         $('#btn_guardar').css('display', 'none');
-        $('#modal_agregarejercicio').modal('show');
+        $('#modal_rutina').modal('show');
     })
+
     $(document).on('click', '#btn_modificar', function () {
         var EjercicioID = $(this).attr('data-ejercicioID');
         var Nombre = $('#txt_nombre').val();
@@ -130,7 +138,7 @@ function events() {
 
     //evento para eliminar
     $(document).on('click', '.btn-eliminar', function (e) {
-        var EjercicioID = $(this).attr('data-ejercicioID');
+        var RutinaID = $(this).attr('data-rutinaid');
         e.preventDefault();
         Swal.fire({
             title: 'ELIMINAR',
@@ -143,7 +151,7 @@ function events() {
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.value) {
-                EliminarEjercicio(EjercicioID);
+                EliminarRutina(RutinaID);
                 Swal.fire(
                   'Eliminado',
                   'El ejercicio se elimino',
@@ -179,6 +187,10 @@ function events() {
             }
         })
     })
+
+    $(document).on('keyup', '.solo-numeros', function () {
+        this.value = (this.value + '').replace(/[^0-9.]/g, '');
+    });
 }
 
 //Carga la tabla inicial de las rutinas
@@ -198,7 +210,7 @@ function MostrarRutina() {
                 //row += '<td>' + item.Nombre + '</td>';
                 //row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button></td>';
                 //row += '</tr>';
-                TablaRutina.row.add([item.RutinaID, item.Nombre, item.NivelRutinaNombre, item.TipoRutinaNombre, '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
+                TablaRutina.row.add([item.RutinaID, item.Nombre, item.NivelRutinaNombre, item.TipoRutinaNombre, '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-rutinaid="' + item.RutinaID + '" data-nombre="' + item.Nombre + '" data-tiporutinaid="' + item.TipoRutinaID + '" data-nivelrutinaid="' + item.NivelRutinaID + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-rutinaid="' + item.RutinaID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
             })
             //$('#data-table-default tbody').append(row);
             console.log(response);
@@ -343,6 +355,36 @@ function MostrarEjercicioFisico() {
             $('#select2-ejerciciofisico').val(-1);
             $('#select2-ejerciciofisico').trigger('change');
             console.log(response);
+        },
+        complete: function () {
+        }
+    })
+}
+
+function EliminarRutina(RutinaID) {
+    var data = {};
+    data.RutinaID = RutinaID;
+    $.ajax({
+        url: 'EliminarRutina',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response[0].Valor == '1') {
+                $.gritter.add({
+                    title: ':)',
+                    text: response[0].Mensaje,
+                    //class_name: 'gritter-light'
+                });
+                MostrarRutina();
+            } else {
+                $.gritter.add({
+                    title: 'Error',
+                    text: response[0].Mensaje
+                    //class_name: 'gritter-light'
+                });
+            }
         },
         complete: function () {
         }

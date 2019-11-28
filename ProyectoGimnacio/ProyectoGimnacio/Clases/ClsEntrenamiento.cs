@@ -61,6 +61,17 @@ namespace ProyectoGimnacio.Clases
         public string Nombre { get; set; }
     }
 
+    public class DetalleRutina
+    {
+        public int DetalleRutinaID { get; set; }
+        public int EjercicioFisicoID { get; set; }
+        public string EjercicioFisicoNombre { get; set; }
+        public int Series { get; set; }
+        public int Repeticiones { get; set; }
+        public double Peso { get; set; }
+        public int Descanso { get; set; }
+    }
+
     public class E_MensajeSalida
     {
         public string Mensaje { get; set; }

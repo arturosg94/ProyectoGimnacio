@@ -126,6 +126,7 @@ function events() {
         $('#select2-ejerciciofisico').val(-1);
         $('#select2-ejerciciofisico').trigger('change');
         $('#btn_guardar').css('display', 'none');
+        MostrarDetalleRutina(RutinaID);
         $('#modal_rutina').modal('show');
     })
 
@@ -220,6 +221,38 @@ function MostrarRutina() {
     })
 }
 
+//Carga la rutina par a ver los ejercicios fisicos
+function MostrarDetalleRutina(RutinaID) {
+    //$('#data-table-default tbody').html('');
+    tablaDetalle.clear().draw();
+    var data = {};
+    data.RutinaID = RutinaID;
+    $.ajax({
+        url: 'MostrarDetalleRutina',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $.each(response, function (i, item) {
+                //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
+                //row += '<tr class="gradeX odd" role="row">';
+                //row += '<td>' + item.EjercicioID + '</td>';
+                //row += '<td>' + item.Imagen + '</td>';
+                //row += '<td>' + item.Nombre + '</td>';
+                //row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button></td>';
+                //row += '</tr>';
+                tablaDetalle.row.add([item.EjercicioFisicoNombre, item.Series, item.Repeticiones, item.Peso, item.Descanso, '<button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminardetalle"><i class="fas fa-trash-alt"></i></button>']).draw();
+            })
+            //$('#data-table-default tbody').append(row);
+            console.log(response);
+        },
+        complete: function () {
+        }
+    })
+}
+
 function AgregarRutina(Nombre, NivelRutinaID, TipoRutinaID) {
     var data = {};
     data.Nombre = Nombre;
@@ -239,7 +272,7 @@ function AgregarRutina(Nombre, NivelRutinaID, TipoRutinaID) {
                     text: 'Rutina Agregada'//response[0].Mensaje
                 });
                 var RutinaID = response[0].Mensaje;
-                //MostrarRutina();
+                MostrarRutina();
                 $.each(ArrayDetalleRutina, function (i, item) {
                     AgregarRutinaDetalle(RutinaID,item.EjercicioFisicoID, item.Series, item.Repeticiones, item.Peso, item.Descanso);
                 });

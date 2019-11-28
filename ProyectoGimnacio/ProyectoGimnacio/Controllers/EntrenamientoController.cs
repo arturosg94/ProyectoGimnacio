@@ -209,6 +209,16 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+        public JsonResult MostrarDetalleRutina(int RutinaID)
+        {
+            JsonResult response = null;
+            List<DetalleRutina> list = new List<DetalleRutina>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.MostrarDetalleRutina(RutinaID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
         public JsonResult AgregarRutina(int NivelRutinaID, int TipoRutinaID, string Nombre)
         {
             JsonResult response = null;

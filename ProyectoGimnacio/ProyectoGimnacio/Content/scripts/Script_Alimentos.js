@@ -1,4 +1,14 @@
-﻿$(document).ready(function () {
+﻿var TablaAlimentos = $('#tabla_alimentos').DataTable({
+    "language": {
+        "emptyTable": "No hay alimentos",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+        "infoEmpty": "Sin filas",
+        "sLengthMenu": "Mostrar _MENU_ filas",
+        "sSearch": "Buscar"
+    }
+});
+
+$(document).ready(function () {
     init();
     events();
 });
@@ -94,27 +104,26 @@ function upload() {
 
 //Carga la tabla inicial de alimento
 function MostrarAlimento() {
-    $('#data-table-default tbody').html('');
-    console.log('se cargo aliemnto');
-    var row = "";
+    TablaAlimentos.clear().draw();
     $.ajax({
         url: 'MostrarAlimento',
        type: 'POST',
         success: function (response) {
             $.each(response, function (i, item) {
-                //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-                row += '<tr class="gradeX odd" role="row">';
-                row += '<td>' + item.AlimentoID + '</td>';
-                row += '<td>' + item.Nombre + '</td>';
-                row += '<td>' + item.Calorias + '</td>';
-                row += '<td>' + item.Proteinas + '</td>';
-                row += '<td>' + item.Grasas + '</td>';
-                row += '<td>' + item.Carbohidratos + '</td>';
-                row += '<td>' + item.Peso + '</td>';
-                row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-alimentoid="' + item.AlimentoID + '" data-nombre="' + item.Nombre + '" data-calorias="' + item.Calorias + '" data-proteinas="' + item.Proteinas + '" data-grasa="' + item.Grasas + '" data-carbohidratos="' + item.Carbohidratos + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-alimentoid="' + item.AlimentoID + '"><i class="fas fa-trash-alt"></i></button></td>';
-                row += '</tr>';
+                ////$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                //row += '<tr class="gradeX odd" role="row">';
+                //row += '<td>' + item.AlimentoID + '</td>';
+                //row += '<td>' + item.Nombre + '</td>';
+                //row += '<td>' + item.Calorias + '</td>';
+                //row += '<td>' + item.Proteinas + '</td>';
+                //row += '<td>' + item.Grasas + '</td>';
+                //row += '<td>' + item.Carbohidratos + '</td>';
+                //row += '<td>' + item.Peso + '</td>';
+                //row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-alimentoid="' + item.AlimentoID + '" data-nombre="' + item.Nombre + '" data-calorias="' + item.Calorias + '" data-proteinas="' + item.Proteinas + '" data-grasa="' + item.Grasas + '" data-carbohidratos="' + item.Carbohidratos + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-alimentoid="' + item.AlimentoID + '"><i class="fas fa-trash-alt"></i></button></td>';
+                //row += '</tr>';
+                TablaAlimentos.row.add([item.AlimentoID, item.Nombre, item.Calorias, item.Proteinas, item.Grasas, item.Carbohidratos, item.Peso, '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-alimentoid="' + item.AlimentoID + '" data-nombre="' + item.Nombre + '" data-calorias="' + item.Calorias + '" data-proteinas="' + item.Proteinas + '" data-grasas="' + item.Grasa + '" data-carbohidratos="' + item.Carbohidratos +'"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-alimentoid="' + item.AlimentoID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
+
             })
-            $('#data-table-default tbody').append(row);
             console.log(response);
         },
 

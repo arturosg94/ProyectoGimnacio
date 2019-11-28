@@ -1,4 +1,14 @@
-﻿$(document).ready(function () {
+﻿var TablaMaquina = $('#tabla_maquina').DataTable({
+    "language": {
+        "emptyTable": "No hay maquina",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+        "infoEmpty": "Sin filas",
+        "sLengthMenu": "Mostrar _MENU_ filas",
+        "sSearch": "Buscar"
+    }
+});
+
+$(document).ready(function () {
     init();
     events();
 });
@@ -78,25 +88,23 @@ function upload() {
 
 //Carga la tabla inicial de las maquinas
 function MostrarMaquinas() {
-    $('#data-table-default tbody').html('');
-    console.log('se cargo las maquinas');
-    var row = "";
-    var rsp;
+    TablaMaquina.clear().draw();
     $.ajax({
         url: 'MostrarMaquina',
         type: 'POST',
         success: function (response) {
             $.each(response, function (i, item) {
-                //    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
-                //    console.log(item.EjercicioID,item.Nombre,item.Imagen);
-                row += '<tr class="gradeX odd" role="row">';
-                row += '<td>' + item.MaquinaID + '</td>';
-                row += '<td>' + item.Nombre + '</td>';
-                row += '<td>' + item.Fabricante + '</td>';
-                row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-maquinaid="' + item.MaquinaID + '" data-nombre="' + item.Nombre + '" data-fabricante="' + item.Fabricante +'"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-maquinaid="' + item.MaquinaID + '"><i class="fas fa-trash-alt"></i></button></td>';
-                row += '</tr>';
+                ////    //$('#select-function').append('<option value="' + item.JobCode + '">' + item.JobName + '</option>')
+                ////    console.log(item.EjercicioID,item.Nombre,item.Imagen);
+                //row += '<tr class="gradeX odd" role="row">';
+                //row += '<td>' + item.MaquinaID + '</td>';
+                //row += '<td>' + item.Nombre + '</td>';
+                //row += '<td>' + item.Fabricante + '</td>';
+                //row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-maquinaid="' + item.MaquinaID + '" data-nombre="' + item.Nombre + '" data-fabricante="' + item.Fabricante +'"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-maquinaid="' + item.MaquinaID + '"><i class="fas fa-trash-alt"></i></button></td>';
+                //row += '</tr>';
+                TablaMaquina.row.add([item.MaquinaID, item.Nombre, item.Fabricante, '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-maquinaid="' + item.MaquinaID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-maquinaid="' + item.MaquinaID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
             })
-            $('#data-table-default tbody').append(row);
+            //$('#data-table-default tbody').append(row);
             console.log(response);
         },
         complete: function () {

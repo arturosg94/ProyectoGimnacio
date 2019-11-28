@@ -1,4 +1,16 @@
-﻿$(document).ready(function () {
+﻿
+var TablaEjerciciofisico = $('#tabla_ejerciciofisico').DataTable({
+    "language": {
+        "emptyTable": "No hay ejercicio fisico",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ filas",
+        "infoEmpty": "Sin filas",
+        "sLengthMenu": "Mostrar _MENU_ filas",
+        "sSearch": "Buscar"
+    }
+});
+
+
+$(document).ready(function () {
     init();
     events();
 });
@@ -90,22 +102,24 @@ function events() {
 
 function MostrarEjercicioFisico() {
     console.log('se cargo los ejercicios fisicos');
-    $('#data-table-default tbody').html('');
-    var row = "";
+    //$('#data-table-default tbody').html('');
+    TablaEjerciciofisico.clear().draw(); 
     $.ajax({
         url: 'MostrarEjercicioFisico',
         type: 'POST',
         success: function (response) {
             $.each(response, function (i, item) {
-                row += '<tr class="gradeX odd" role="row">';
-                row += '<td>' + item.EjercicioFisicoID + '</td>';
-                row += '<td>' + item.EjercicioNombre + '</td>';
-                row += '<td>' + item.MusculoNombre + '</td>';
-                row += '<td>' + item.MaquinaNombre + '</td>';
-                row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '" data-ejercicioid="' + item.EjercicioID + '"data-maquinaid="' + item.MaquinaID + '"data-musculoid="' + item.MusculoID + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '"><i class="fas fa-trash-alt"></i></button></td>';
-                row += '</tr>';
+            //    row += '<tr class="gradeX odd" role="row">';
+            //    row += '<td>' + item.EjercicioFisicoID + '</td>';
+            //    row += '<td>' + item.EjercicioNombre + '</td>';
+            //    row += '<td>' + item.MusculoNombre + '</td>';
+            //    row += '<td>' + item.MaquinaNombre + '</td>';
+            //    row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '" data-ejercicioid="' + item.EjercicioID + '"data-maquinaid="' + item.MaquinaID + '"data-musculoid="' + item.MusculoID + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '"><i class="fas fa-trash-alt"></i></button></td>';
+            //    row += '</tr>';
+               TablaEjerciciofisico.row.add([item.EjercicioFisicoID, item.EjercicioNombre, item.MusculoNombre, item.MaquinaNombre, '<button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejerciciofisicoid="' + item.EjercicioFisicoID + '"><i class="fas fa-trash-alt"></i></button>']).draw();
             })
-            $('#data-table-default tbody').append(row);
+            //$('#data-table-default tbody').append(row);
+            console.log(response);
         },
         complete: function () {
         }
@@ -140,6 +154,7 @@ function AgregarEjercicioFisico(ejercicio,maquina,musculo) {
             }
         },
         complete: function () {
+            MostrarEjercicioFisico();
         }
     })
 }
@@ -247,11 +262,11 @@ function EditarEjercicioFisico(EjercicioFisicoID, EjercicioID, MaquinaID, Muscul
     })
 }
 
-function EliminarEjercicio(EjercicioID) {
+function EliminarEjercicioFisico(EjercicioFisicoID) {
     var data = {};
-    data.EjercicioID = EjercicioID;
+    data.EjercicioFisicoID = EjercicioFisicoID;
     $.ajax({
-        url: 'EliminarEjercicio',
+        url: 'EliminarEjerciciofisico',
         type: 'POST',
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",

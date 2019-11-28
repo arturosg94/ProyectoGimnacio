@@ -26,6 +26,16 @@ namespace ProyectoGimnacio.Clases
         public decimal Carbohidratos { get; set; }
     }
 
+    public class DetalleComida
+    {
+        public int AlimentoID { get; set; }
+        public string AlimentoNombre { get; set; }
+        public decimal Carbohidratos { get; set; }
+        public int Calorias { get; set; }
+        public decimal Proteinas { get; set; }
+        public decimal Grasas { get; set; }
+    }
+
     public class Menu
     {
         public int MenuID { get; set; }

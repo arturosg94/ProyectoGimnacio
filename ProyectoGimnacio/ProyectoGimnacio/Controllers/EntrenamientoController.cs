@@ -239,6 +239,16 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
+        public JsonResult EditarRutina(int RutinaID, int NivelRutinaID, int TipoRutinaID, string Nombre)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            EntrenamientoModel cn = new EntrenamientoModel();
+            list = cn.EditarRutina(RutinaID, NivelRutinaID, TipoRutinaID, Nombre);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
         public JsonResult MostrarNivelRutina()
         {
             JsonResult response = null;

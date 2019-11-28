@@ -110,7 +110,17 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
-        public JsonResult AgregarMaquina(string Nombre)
+        public JsonResult MostrarDetalleComida(int ComidaID)
+        {
+            JsonResult response = null;
+            List<DetalleComida> list = new List<DetalleComida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.MostrarDetalleComida(ComidaID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        public JsonResult AgregarComida(string Nombre)
         {
             JsonResult response = null;
             List<E_MensajeSalida> list = new List<E_MensajeSalida>();
@@ -120,27 +130,96 @@ namespace ProyectoGimnacio.Controllers
             return response;
         }
 
-        /****************************RUTINA******************************************************/
-        public JsonResult MostrarRutina()
-        {
-            JsonResult response = null;
-            List<Rutina> list = new List<Rutina>();
-            NutricionModel cn = new NutricionModel();
-            list = cn.MostrarRutina();
-            response = Json(list, JsonRequestBehavior.AllowGet);
-            return response;
-        }
-
-        public JsonResult AgregarRutina(int NivelRutinaID, int TipoRutinaID, string Nombre)
+        public JsonResult AgregarDetalleComida(int ComidaID, int AlimentoID)
         {
             JsonResult response = null;
             List<E_MensajeSalida> list = new List<E_MensajeSalida>();
             NutricionModel cn = new NutricionModel();
-            list = cn.AgregarRutina(NivelRutinaID, TipoRutinaID, Nombre);
+            list = cn.AgregarDetalleComida(ComidaID, AlimentoID);
             response = Json(list, JsonRequestBehavior.AllowGet);
             return response;
         }
 
+        public JsonResult EditarComida(int ComidaID, string Nombre)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.EditarComida(ComidaID, Nombre);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
 
+        public JsonResult EliminarComida(int ComidaID)
+        {
+            JsonResult response = null;
+            List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.EliminarComida(ComidaID);
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        /****************************DIETA******************************************************/
+
+        public JsonResult MostrarDieta()
+        {
+            JsonResult response = null;
+            List<Comida> list = new List<Comida>();
+            NutricionModel cn = new NutricionModel();
+            list = cn.MostrarComida();
+            response = Json(list, JsonRequestBehavior.AllowGet);
+            return response;
+        }
+
+        //public JsonResult MostrarDetalleComida(int ComidaID)
+        //{
+        //    JsonResult response = null;
+        //    List<DetalleComida> list = new List<DetalleComida>();
+        //    NutricionModel cn = new NutricionModel();
+        //    list = cn.MostrarDetalleComida(ComidaID);
+        //    response = Json(list, JsonRequestBehavior.AllowGet);
+        //    return response;
+        //}
+
+        //public JsonResult AgregarComida(string Nombre)
+        //{
+        //    JsonResult response = null;
+        //    List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+        //    NutricionModel cn = new NutricionModel();
+        //    list = cn.AgregarComida(Nombre);
+        //    response = Json(list, JsonRequestBehavior.AllowGet);
+        //    return response;
+        //}
+
+        //public JsonResult AgregarDetalleComida(int ComidaID, int AlimentoID)
+        //{
+        //    JsonResult response = null;
+        //    List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+        //    NutricionModel cn = new NutricionModel();
+        //    list = cn.AgregarDetalleComida(ComidaID, AlimentoID);
+        //    response = Json(list, JsonRequestBehavior.AllowGet);
+        //    return response;
+        //}
+
+        //public JsonResult EditarComida(int ComidaID, string Nombre)
+        //{
+        //    JsonResult response = null;
+        //    List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+        //    NutricionModel cn = new NutricionModel();
+        //    list = cn.EditarComida(ComidaID, Nombre);
+        //    response = Json(list, JsonRequestBehavior.AllowGet);
+        //    return response;
+        //}
+
+        //public JsonResult EliminarComida(int ComidaID)
+        //{
+        //    JsonResult response = null;
+        //    List<E_MensajeSalida> list = new List<E_MensajeSalida>();
+        //    NutricionModel cn = new NutricionModel();
+        //    list = cn.EliminarComida(ComidaID);
+        //    response = Json(list, JsonRequestBehavior.AllowGet);
+        //    return response;
+        //}
     }
 }

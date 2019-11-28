@@ -112,6 +112,11 @@ function events() {
 
     //evento para editar
     $(document).on('click', '.btn-editar', function () {
+        $('#txt_series').val('');
+        $('#txt_repeticiones').val('');
+        $('#txt_peso').val('');
+        $('#txt_descanso').val('');
+        ArrayDetalleRutina = new Array();
         var RutinaID = $(this).attr('data-rutinaid');
         var Nombre = $(this).attr('data-nombre');
         var TipoRutinaID = $(this).attr('data-tiporutinaid');
@@ -129,12 +134,14 @@ function events() {
         MostrarDetalleRutina(RutinaID);
         $('#modal_rutina').modal('show');
     })
-
+    //actualiza la cabecera de la rutina y elimina su detalle para despues insertar el detalle actualizado
     $(document).on('click', '#btn_modificar', function () {
-        var EjercicioID = $(this).attr('data-ejercicioID');
+        var RutinaID = $(this).attr('data-rutinaid');
         var Nombre = $('#txt_nombre').val();
-        EditarEjercicio(EjercicioID, Nombre);
-        $('#modal_agregarejercicio').modal('hide');
+        var NivelRutinaID = $('#select2-nivelrutina').val();
+        var TipoRutinaID = $('#select2-tiporutina').val();
+        EditarRutina(RutinaID, Nombre, NivelRutinaID, TipoRutinaID);
+        $('#modal_rutina').modal('hide');
     })
 
     //evento para eliminar
@@ -155,7 +162,7 @@ function events() {
                 EliminarRutina(RutinaID);
                 Swal.fire(
                   'Eliminado',
-                  'El ejercicio se elimino',
+                  'La rutina se elimino',
                   'success'
                 )
             }
@@ -244,6 +251,14 @@ function MostrarDetalleRutina(RutinaID) {
                 //row += '<td><button type="button" class="btn btn-xs btn-warning m-r-5 m-b-5 btn-editar" data-ejercicioid="' + item.EjercicioID + '" data-nombre="' + item.Nombre + '"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminar" data-ejercicioid="' + item.EjercicioID + '"><i class="fas fa-trash-alt"></i></button></td>';
                 //row += '</tr>';
                 tablaDetalle.row.add([item.EjercicioFisicoNombre, item.Series, item.Repeticiones, item.Peso, item.Descanso, '<button type="button" class="btn btn-xs btn-danger m-r-5 m-b-5 btn-eliminardetalle"><i class="fas fa-trash-alt"></i></button>']).draw();
+                ArrayDetalleRutina.push({
+                    EjercicioFisicoID: item.EjercicioFisicoID,
+                    EjercicioFisicoNombre: item.EjercicioFisicoNombre,
+                    Series: item.Series,
+                    Repeticiones: item.Repeticiones,
+                    Peso: item.Peso,
+                    Descanso: item.Descanso
+                });
             })
             //$('#data-table-default tbody').append(row);
             console.log(response);
@@ -272,7 +287,7 @@ function AgregarRutina(Nombre, NivelRutinaID, TipoRutinaID) {
                     text: 'Rutina Agregada'//response[0].Mensaje
                 });
                 var RutinaID = response[0].Mensaje;
-                MostrarRutina();
+                
                 $.each(ArrayDetalleRutina, function (i, item) {
                     AgregarRutinaDetalle(RutinaID,item.EjercicioFisicoID, item.Series, item.Repeticiones, item.Peso, item.Descanso);
                 });
@@ -283,6 +298,7 @@ function AgregarRutina(Nombre, NivelRutinaID, TipoRutinaID) {
                 });
             }
             console.log(response);
+            MostrarRutina();
         },
         complete: function () {
         }
@@ -318,7 +334,7 @@ function AgregarRutinaDetalle(RutinaID, EjercicioFisicoID, Series, Repeticiones,
             console.log(response);
         },
         complete: function () {
-            MostrarRutina();
+            //MostrarRutina();
         }
     })
 }
@@ -418,6 +434,44 @@ function EliminarRutina(RutinaID) {
                     //class_name: 'gritter-light'
                 });
             }
+        },
+        complete: function () {
+        }
+    })
+}
+
+function EditarRutina(RutinaID, Nombre, NivelRutinaID, TipoRutinaID) {
+    var data = {};
+    data.RutinaID = RutinaID;
+    data.Nombre = Nombre;
+    data.NivelRutinaID = NivelRutinaID;
+    data.TipoRutinaID = TipoRutinaID;
+    console.log(data);
+    $.ajax({
+        url: 'EditarRutina',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            if (response[0].Valor == '1') {
+                $.gritter.add({
+                    title: ':)',
+                    text: response[0].Mensaje,
+                    //class_name: 'gritter-light'
+                });
+                $.each(ArrayDetalleRutina, function (i, item) {
+                    AgregarRutinaDetalle(RutinaID, item.EjercicioFisicoID, item.Series, item.Repeticiones, item.Peso, item.Descanso);
+                });
+            } else {
+                $.gritter.add({
+                    title: 'Error',
+                    text: response[0].Mensaje
+                    //class_name: 'gritter-light'
+                });
+            }
+            console.log(response);
+            MostrarRutina();
         },
         complete: function () {
         }

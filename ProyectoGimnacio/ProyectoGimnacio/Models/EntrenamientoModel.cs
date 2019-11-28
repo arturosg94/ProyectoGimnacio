@@ -616,5 +616,71 @@ namespace ProyectoGimnacio.Models
             }
             return listEntidad;
         }
+
+        public List<E_MensajeSalida> EditarRutina(int RutinaID, int NivelRutinaID, int TipoRutinaID, string Nombre)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_rutina", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                command.Parameters.Add("@RutinaID", SqlDbType.Int).Value = RutinaID;
+                command.Parameters.Add("@NivelRutinaID", SqlDbType.Int).Value = NivelRutinaID;
+                command.Parameters.Add("@TipoRutinaID", SqlDbType.Int).Value = TipoRutinaID;
+                command.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Nombre;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        //public List<E_MensajeSalida> EditarDetalleRutina(int RutinaID, int EjercicioFisicoID, int Series, int Repeticiones, int Peso, int Descanso)
+        //{
+        //    List<E_MensajeSalida> listEntidad = null;
+        //    using (SqlConnection connection = new SqlConnection(GymDB))
+        //    {
+        //        connection.Open();
+        //        SqlCommand command = new SqlCommand("pa_mant_detallerutina", connection);
+        //        command.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+        //        command.Parameters.Add("@RutinaID", SqlDbType.Int).Value = RutinaID;
+        //        command.Parameters.Add("@EjercicioFisicoID", SqlDbType.Int).Value = EjercicioFisicoID;
+        //        command.Parameters.Add("@Series", SqlDbType.Int).Value = Series;
+        //        command.Parameters.Add("@Repeticiones", SqlDbType.Int).Value = Repeticiones;
+        //        command.Parameters.Add("@Peso", SqlDbType.Int).Value = Peso;
+        //        command.Parameters.Add("@Descanso", SqlDbType.Int).Value = Descanso;
+        //        command.CommandType = CommandType.StoredProcedure;
+        //        SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+        //        if (reader.HasRows)
+        //        {
+        //            E_MensajeSalida entidad = null;
+        //            listEntidad = new List<E_MensajeSalida>();
+        //            while (reader.Read())
+        //            {
+        //                entidad = new E_MensajeSalida();
+        //                entidad.Mensaje = reader.GetString(0);
+        //                entidad.Valor = reader.GetString(1);
+        //                listEntidad.Add(entidad);
+        //            }
+        //        }
+        //        reader.Close();
+        //        connection.Close();
+        //    }
+        //    return listEntidad;
+        //}
     }
 }

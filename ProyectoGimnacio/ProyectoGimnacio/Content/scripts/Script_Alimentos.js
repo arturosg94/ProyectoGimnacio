@@ -84,13 +84,13 @@ function events() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'SI'
         }).then((result) => {
             if (result.value) {
                 EliminarAlimento(AlimentoID);
                 Swal.fire(
-                  'Deleted!',
-                  'Your file has been deleted.',
+                  'ELIMINADO',
+                  'El alimento ha sido eliminado',
                   'success'
                 )
             }
@@ -137,7 +137,7 @@ function AgregarAlimento(nombre, calorias, proteinas, grasa, carbohidratos) {
     data.nombre = nombre;
     data.calorias = calorias;
     data.proteinas = proteinas;
-    data.grasa = grasa;
+    data.grasas = grasa;
     data.carbohidratos = carbohidratos;
     console.log(data);
     $.ajax({
@@ -161,6 +161,7 @@ function AgregarAlimento(nombre, calorias, proteinas, grasa, carbohidratos) {
                 });
             }
             console.log(response);
+            MostrarAlimento();
         },
         complete: function () {
         }

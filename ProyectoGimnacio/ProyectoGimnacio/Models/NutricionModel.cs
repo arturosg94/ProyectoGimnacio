@@ -320,5 +320,179 @@ namespace ProyectoGimnacio.Models
             }
             return listEntidad;
         }
+        /****************************DIETA******************************************************/
+
+        public List<Dieta> MostrarDieta()
+        {
+            List<Dieta> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_dieta", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    Dieta entidad = null;
+                    listEntidad = new List<Dieta>();
+                    while (reader.Read())
+                    {
+                        entidad = new Dieta();
+                        entidad.DietaID = reader.GetInt32(0);
+                        entidad.Nombre = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+        public List<Menu> MostrarDetalleDieta(int DietaID)
+        {
+            List<Menu> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_menu", connection);
+                command.Parameters.Add("@DietaID", SqlDbType.Int).Value = DietaID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    Menu entidad = null;
+                    listEntidad = new List<Menu>();
+                    while (reader.Read())
+                    {
+                        entidad = new Menu();
+                        entidad.ComidaID = reader.GetInt32(0);
+                        entidad.NombreComida = reader.GetString(1);
+                        entidad.HorarioID = reader.GetInt32(2);
+                        entidad.NombreHorario = reader.GetString(3);
+
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<E_MensajeSalida> AgregarDieta(string Nombre)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_dieta", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
+                command.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Nombre;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+        public List<Horario> MostrarHorario()
+        {
+            List<Horario> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_most_horario", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    Horario entidad = null;
+                    listEntidad = new List<Horario>();
+                    while (reader.Read())
+                    {
+                        entidad = new Horario();
+                        entidad.HorarioID = reader.GetInt32(0);
+                        entidad.Nombre = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<E_MensajeSalida> AgregarDetalleDieta(int DietaID, int ComidaID, int HorarioID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_menu", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
+                command.Parameters.Add("@DietaID", SqlDbType.Int).Value = DietaID;
+                command.Parameters.Add("@ComidaID", SqlDbType.Int).Value = ComidaID;
+                command.Parameters.Add("@HorarioID", SqlDbType.Int).Value = HorarioID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
+        public List<E_MensajeSalida> EliminarDieta(int DietaID)
+        {
+            List<E_MensajeSalida> listEntidad = null;
+            using (SqlConnection connection = new SqlConnection(GymDB))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("pa_mant_dieta", connection);
+                command.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
+                command.Parameters.Add("@DietaID", SqlDbType.VarChar).Value = DietaID;
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    E_MensajeSalida entidad = null;
+                    listEntidad = new List<E_MensajeSalida>();
+                    while (reader.Read())
+                    {
+                        entidad = new E_MensajeSalida();
+                        entidad.Mensaje = reader.GetString(0);
+                        entidad.Valor = reader.GetString(1);
+                        listEntidad.Add(entidad);
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            return listEntidad;
+        }
+
     }
 }

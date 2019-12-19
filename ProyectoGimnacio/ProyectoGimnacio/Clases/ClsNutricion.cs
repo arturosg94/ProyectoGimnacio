@@ -38,15 +38,20 @@ namespace ProyectoGimnacio.Clases
 
     public class Menu
     {
-        public int MenuID { get; set; }
-        public string DietaID { get; set; }
         public int ComidaID { get; set; }
+        public string NombreComida { get; set; }
         public int HorarioID { get; set; }
+        public string NombreHorario { get; set; }
     }
 
     public class Dieta
     {
         public int DietaID { get; set; }
+        public string Nombre { get; set; }
+    }
+    public class Horario
+    {
+        public int HorarioID { get; set; }
         public string Nombre { get; set; }
     }
 }
